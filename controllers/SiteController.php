@@ -8,6 +8,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\RegistrationForm;
+use frontend\models\Clients;
+use frontend\models\SomeAccessories;
 /**
  * Site controller
  */
@@ -70,11 +72,27 @@ class SiteController extends Controller
 		$model = new Clients();
         return $this->render('index', ['model'=>$model]);
     }
-    public function regist(){
+    public function actionRegist(){
 		
-	   if(RegistrationForm::)
-		
-		
-		
+	   $registration = new RegistrationForm();
+	   $some = new SomeAccessories();
+	   
+	   if($some->postExist('RegistrationForm')){
+		   
+		   $registration->attributes = $some->postExist('RegistrationForm');
+		   
+		   if($registration->validate() && $registration->registration()){
+			   
+			   return $this->goHome();
+			   
+		   }
+	   }
+		return $this->render('registration', ['registration' => $registration]);
 	}
-}
+	
+	public function actionAddPhone(){
+		
+		return $model->Password();
+		
+	}	
+	}

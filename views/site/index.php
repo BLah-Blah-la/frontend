@@ -9,16 +9,6 @@ use yii\widgets\ActiveForm;
 ?>
 <div class="clients-index">
 
-    <?php $form = ActiveForm::begin(); ?>
-
-        <?= $form->field($model, 'id') ?>
-        <?= $form->field($model, 'age') ?>
-        <?= $form->field($model, 'first_name') ?>
-        <?= $form->field($model, 'last_name') ?>
     
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
-    <?php ActiveForm::end(); ?>
 
 </div><!-- clients-index -->

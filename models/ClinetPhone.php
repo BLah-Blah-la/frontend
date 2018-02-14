@@ -29,10 +29,9 @@ class ClinetPhone extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
-            [['id', 'client_id'], 'integer'],
+            [['client_id', 'phone_digital'], 'required'],
+            [['client_id'], 'integer'],
             [['phone_digital'], 'string', 'max' => 10],
-            [['id'], 'unique'],
             [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientClient::className(), 'targetAttribute' => ['client_id' => 'id']],
         ];
     }

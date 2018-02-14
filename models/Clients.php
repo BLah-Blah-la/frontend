@@ -20,18 +20,7 @@ class Clients extends \yii\db\ActiveRecord
     public static function tableName()
     {
         return 'client_client';
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'age'], 'integer'],
-            [['first_name', 'last_name'], 'string', 'max' => 50],
-        ];
-    }
+	}
 
     /**
      * @inheritdoc
