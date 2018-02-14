@@ -5,11 +5,11 @@ use yii\base\Model;
 
 class SomeAccessories extends Model
 {
-	public $Ran;
+	public $_rand;
 	
-	public function Password()
+	public function generate()
 	{
-		return $this->Ran = mt_rand(111111111,999999999);
+		return $this->_rand = mt_rand(111111111,999999999);
 		
 	}
 	
@@ -17,6 +17,11 @@ class SomeAccessories extends Model
 		
 		return \Yii::$app->request->post($post);
 		
+	}
+	
+	public function getExist($get){
+		
+		return \Yii::$app->request->get($get);
 	}
 	
 	

@@ -61,7 +61,7 @@ class LoginForm extends Model
      */
     public static function loginList()
     {
-        /** @var \dektrium\user\Module $module */
+        * @var \dektrium\user\Module $module
         $module = \Yii::$app->getModule('user');
 
         $userModel = $module->modelMap['User'];
@@ -85,40 +85,10 @@ class LoginForm extends Model
     public function rules()
     {
         $rules = [
-            'loginTrim' => ['login', 'trim'],
-            'requiredFields' => [['login'], 'required'],
-            'confirmationValidate' => [
-                'login',
-                function ($attribute) {
-                    if ($this->user !== null) {
-                        $confirmationRequired = $this->module->enableConfirmation
-                            && !$this->module->enableUnconfirmedLogin;
-                        if ($confirmationRequired && !$this->user->getIsConfirmed()) {
-                            $this->addError($attribute, Yii::t('user', 'You need to confirm your email address'));
-                        }
-                        if ($this->user->getIsBlocked()) {
-                            $this->addError($attribute, Yii::t('user', 'Your account has been blocked'));
-                        }
-                    }
-                }
-            ],
-            'rememberMe' => ['rememberMe', 'boolean'],
-        ];
-
-        if (!$this->module->debug) {
-            $rules = array_merge($rules, [
-                'requiredFields' => [['login', 'password'], 'required'],
-                'passwordValidate' => [
-                    'password',
-                    function ($attribute) {
-                        if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
-                            $this->addError($attribute, Yii::t('user', 'Invalid login or password'));
-                        }
-                    }
-                ]
-            ]);
-        }
-
+            
+			[['first_name', 'last_name'], 'required'],
+			
+		];
         return $rules;
     }
 
@@ -133,7 +103,7 @@ class LoginForm extends Model
       if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
         $this->addError($attribute, Yii::t('user', 'Invalid login or password'));
     }
-
+    
     /**
      * Validates form and logs the user in.
      *
