@@ -26,10 +26,10 @@ class RegistrationForm extends Model
             [['Age'], 'integer'],
             [['First_name', 'Last_name'], 'string', 'max' => 50],
 			
-			[['client_id', 'phone_digital'], 'required'],
+			/* [['client_id', 'phone_digital'], 'required'],
             [['client_id'], 'integer'],
             [['phone_digital'], 'string', 'max' => 10],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientClient::className(), 'targetAttribute' => ['client_id' => 'id']],
+            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientClient::className(), 'targetAttribute' => ['client_id' => 'id']], */
 			
 		];
     }
