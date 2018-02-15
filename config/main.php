@@ -29,10 +29,10 @@ return [
             'httpOnly' => true,
         ], 
 	],*/
-/* 	'user' => [
+ 	'user' => [
             'identityClass' => 'common\models\User',
             'enableAutoLogin' => true,
-        ], */
+        ],
 		
     'session' => [
         'name' => 'FRONTENDSESSID',
