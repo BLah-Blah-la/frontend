@@ -11,12 +11,65 @@ use frontend\models\RegistrationForm;
 use frontend\models\Clients;
 use frontend\models\SomeAccessories;
 use frontend\models\LogintForm;
+use dektrium\user\traits\EventTrait;
 /**
  * Site controller
  */
 class SiteController extends Controller
 {
+    const EVENT_BEFORE_LOGIN = 'beforeLogin';
+
     /**
+     * Event is triggered after logging user in.
+     * Triggered with \dektrium\user\events\FormEvent.
+     */
+    const EVENT_AFTER_LOGIN = 'afterLogin';
+
+    /**
+     * Event is triggered before logging user out.
+     * Triggered with \dektrium\user\events\UserEvent.
+     */
+    const EVENT_BEFORE_LOGOUT = 'beforeLogout';
+
+    /**
+     * Event is triggered after logging user out.
+     * Triggered with \dektrium\user\events\UserEvent.
+     */
+    const EVENT_AFTER_LOGOUT = 'afterLogout';
+
+    /**
+     * Event is triggered before authenticating user via social network.
+     * Triggered with \dektrium\user\events\AuthEvent.
+     */
+    const EVENT_BEFORE_AUTHENTICATE = 'beforeAuthenticate';
+
+    /**
+     * Event is triggered after authenticating user via social network.
+     * Triggered with \dektrium\user\events\AuthEvent.
+     */
+    const EVENT_AFTER_AUTHENTICATE = 'afterAuthenticate';
+
+    /**
+     * Event is triggered before connecting social network account to user.
+     * Triggered with \dektrium\user\events\AuthEvent.
+     */
+    const EVENT_BEFORE_CONNECT = 'beforeConnect';
+
+    /**
+     * Event is triggered before connecting social network account to user.
+     * Triggered with \dektrium\user\events\AuthEvent.
+     */
+    const EVENT_AFTER_CONNECT = 'afterConnect';
+	
+	
+	use EventTrait;
+	
+	
+	
+	
+	
+	
+	/**
      * @inheritdoc
      */
   /*   public function behaviors()
@@ -112,5 +165,23 @@ class SiteController extends Controller
 		
 		
 	}
-	
+	public function actionLogout()
+    {
+    /*     $event = $this->getUserEvent(\Yii::$app->user->identity);
+
+        $this->trigger(self::EVENT_BEFORE_LOGOUT, $event); */
+
+        Yii::$app->user->logout();
+/* 
+        $this->trigger(self::EVENT_AFTER_LOGOUT, $event); */
+
+        return $this->goHome();
+    }
+    public function actionGetid(){
+		
+   		$id = \Yii::$app->user->getId();
+	   
+	    return $this->render('getid', ['id' => $id]);
+		
+	}
 	}

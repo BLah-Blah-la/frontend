@@ -22,13 +22,18 @@ return [
             'csrfParam' => '_csrf-frontend',
 			'baseUrl' => '',
         ],
- /*    'user' => [
+  /*    'user' => [
         'identityCookie' => [
             'name'     => '_frontendIdentity',
             'path'     => '/',
             'httpOnly' => true,
-        ],
-    ], */
+        ], 
+	],*/
+/* 	'user' => [
+            'identityClass' => 'common\models\User',
+            'enableAutoLogin' => true,
+        ], */
+		
     'session' => [
         'name' => 'FRONTENDSESSID',
         'cookieParams' => [

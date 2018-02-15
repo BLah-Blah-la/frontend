@@ -3,6 +3,7 @@ namespace frontend\models;
 use Yii;
 use yii\base\Model;
 use frontend\models\Clients;
+use common\models\User;
 /**
  * LoginForm is the model behind the login form.
  *
@@ -13,8 +14,8 @@ class LogintForm extends Model
 {
     public $first_name;
     public $last_name;
-/*     public $rememberMe = true;
-    private $_user = false; */
+/*     public $rememberMe = true;*/
+    private $_user = false; 
 /*     $hash = new Generalinformation();
  */
     /**
