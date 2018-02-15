@@ -33,7 +33,7 @@ use yii\web\Response;
  *
  * @author Dmitry Erofeev <dmeroff@gmail.com>
  */
-class LoginController extends Controller
+class UserController extends Controller
 {
     use AjaxValidationTrait;
     use EventTrait;

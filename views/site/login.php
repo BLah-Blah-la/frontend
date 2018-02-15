@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ['inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control', 'tabindex' => '1']]
                     );
                     ?>
-
+                     
                 <?php endif ?>
 
                 <?php if ($module->debug): ?>
@@ -68,7 +68,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         $model,
                         'password',
                         ['inputOptions' => ['class' => 'form-control', 'tabindex' => '2']])
-                        ->passwordInput()
+                        
+						->passwordInput()
                         ->label(
                             Yii::t('user', 'Password')
                             . ($module->enablePasswordRecovery ?

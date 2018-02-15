@@ -5,6 +5,7 @@ use yii\base\Model;
 
 class SomeAccessories extends Model
 {
+
 	public $_rand;
 	
 	public function generate()
@@ -22,6 +23,14 @@ class SomeAccessories extends Model
 	public function getExist($get){
 		
 		return \Yii::$app->request->get($get);
+	}
+	
+	public function findBylastName($lastname){
+		
+		//$find = findOne($lastname);
+		
+		return $find;
+
 	}
 	
 	

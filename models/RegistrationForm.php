@@ -37,9 +37,9 @@ class RegistrationForm extends Model
 	public function registration(){
 		
 	   $registration = new Clients();
-	   $password = new SomeAccessories();
-	   $password = $password->Password();
-	   $registration->id = $password;
+	   $generate = new SomeAccessories();
+	   $generate = $generate->generate();
+	   $registration->id = $generate;
 	   $registration->first_name = $this->First_name;
 	   $registration->last_name = $this->Last_name;
        $registration->age = $this->Age;

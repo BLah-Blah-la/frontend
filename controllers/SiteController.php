@@ -10,6 +10,7 @@ use yii\filters\AccessControl;
 use frontend\models\RegistrationForm;
 use frontend\models\Clients;
 use frontend\models\SomeAccessories;
+use frontend\models\LogintForm;
 /**
  * Site controller
  */
@@ -18,7 +19,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
+  /*   public function behaviors()
     {
         return [
             'access' => [
@@ -44,7 +45,7 @@ class SiteController extends Controller
                 ],
             ],
         ];
-    }
+    } */
 
     /**
      * @inheritdoc
@@ -92,7 +93,24 @@ class SiteController extends Controller
 	
 	public function actionAddPhone(){
 		
-		return $model->Password();
+		return $model->generate();
 		
-	}	
+	}
+	public function actionLogin(){
+		
+	{
+         if (!\Yii::$app->user->isGuest) {
+            $this->goHome();
+        }
+		
+        $model = new LogintForm();
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            return $this->goBack();
+        }
+        return $this->render('logins', ['model' => $model]);
+    }
+		
+		
+	}
+	
 	}

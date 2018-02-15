@@ -30,10 +30,10 @@ class LoginForm extends Model
     use ModuleTrait;
 
     /** @var string User's email or username */
-    public $login;
+    public $first_name;
 
     /** @var string User's plain password */
-    public $password;
+    public $last_name;
 
     /** @var string Whether to remember the user */
     public $rememberMe = false;
@@ -61,23 +61,23 @@ class LoginForm extends Model
      */
     public static function loginList()
     {
-        * @var \dektrium\user\Module $module
-        $module = \Yii::$app->getModule('user');
+        /* @var \dektrium\user\Module $module */
+       /*  $module = \Yii::$app->getModule('user');
 
         $userModel = $module->modelMap['User'];
 
-        return ArrayHelper::map($userModel::find()->where(['blocked_at' => null])->all(), 'username', function ($user) {
+        return ArrayHelper::map($userModel::find()->where(['first_name' => null])->all(), 'username', function ($user) {
             return sprintf('%s (%s)', Html::encode($user->username), Html::encode($user->email));
-        });
+        }); */
     }
 
     /** @inheritdoc */
     public function attributeLabels()
     {
         return [
-            'login'      => Yii::t('user', 'Login'),
-            'password'   => Yii::t('user', 'Password'),
-            'rememberMe' => Yii::t('user', 'Remember me next time'),
+            'first_name'  => Yii::t('user', 'Name'),
+            'last_name'   => Yii::t('user', 'Surname'),
+            'rememberMe'  => Yii::t('user', 'Remember me next time'),
         ];
     }
 
@@ -93,11 +93,13 @@ class LoginForm extends Model
     }
 
     /**
-     * Validates if the hash of the given password is identical to the saved hash in the database.
+     * !Validates if the hash of the given password is identical to the saved hash in the database.
      * It will always succeed if the module is in DEBUG mode.
      *
      * @return void
      */
+	 /*this is here will be last_name*/
+	 
     public function validatePassword($attribute, $params)
     {
       if ($this->user === null || !Password::validate($this->password, $this->user->password_hash))
