@@ -135,12 +135,24 @@ class SiteController extends Controller
 	   $registration = Yii::createObject(RegistrationForm::className());
 	   $some = Yii::createObject(SomeAccessories::className());
 	   $id = $some->render_id();
-	   $phone_default = $some->generate();
 	   
 	   if($some->postExist('RegistrationForm')){
 		   
+		   
+		   
 		   $registration->attributes = $some->postExist('RegistrationForm');
 		   
+		   
+		   if($registration->phone !== null){
+			   
+			   $phone_default = $registration->phone;
+		   
+		    }
+			if($registration->phone == null){
+				
+				$phone_default = $some->generate();
+			   
+			   }
 
 		   if($registration->validate() && $registration->registration($id) && $registration->addPhone($id, $phone_default)){
 			   
