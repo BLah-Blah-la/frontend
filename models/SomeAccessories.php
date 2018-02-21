@@ -25,12 +25,9 @@ class SomeAccessories extends Model
 		return \Yii::$app->request->get($get);
 	}
 	
-	public function findBylastName($lastname){
+	public function render_id(){
 		
-		//$find = findOne($lastname);
-		
-		return $find;
-
+		return $id = \Yii::$app->session['id'] = self::generate();
 	}
 	
 	

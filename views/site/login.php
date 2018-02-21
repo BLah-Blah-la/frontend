@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'validateOnType' => false,
                     'validateOnChange' => false,
                 ]) ?>
-
+                
                 <?php if ($module->debug): ?>
                     <?= $form->field($model, 'login', [
                         'inputOptions' => [

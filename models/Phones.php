@@ -13,14 +13,14 @@ use Yii;
  *
  * @property ClientClient $client
  */
-class ClinetPhone extends \yii\db\ActiveRecord
+class Phones extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'client_phone';
+        return 'Phones';
     }
 
     /**
@@ -48,12 +48,5 @@ class ClinetPhone extends \yii\db\ActiveRecord
             'phone_digital' => 'Phone Digital',
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getClient()
-    {
-        return $this->hasOne(Clients::className(), ['id' => 'client_id']);
-    }
 }
+?>

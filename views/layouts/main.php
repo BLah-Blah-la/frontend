@@ -46,7 +46,7 @@ AppAsset::register($this);
                 'Logout (' . Yii::$app->user->identity->last_name . ')',
                 ['class' => 'btn btn-link logout']
             )
-			. Html::a('Add_phone', ['/site/addphone'])
+			. Html::a('Add_phone', ['/site/add-phone'])
             . Html::endForm()
             . '</li>';
     }

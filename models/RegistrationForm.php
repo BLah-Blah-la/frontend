@@ -1,6 +1,7 @@
 <?php
 namespace frontend\models;
 
+use Yii;
 use frontend\models\Clients;
 use yii\db\ActiveRecord;
 use dektrium\user\models\User;
@@ -11,51 +12,90 @@ use yii\base\Model;
 class RegistrationForm extends Model 
 {
 
-    public $First_name;
-    public $Last_name;
-    public $Age;
-	public $Phone_digital;
-	public $Client_id;
-	public $Id_user;
+    public $first_name;
+    public $last_name;
+    public $age;
+	public $phone_digital;
+	public $client_id;
+	public $phone;
+	public $add_phone;
 	
 	public function rules()
     {
         return [
+			
+	    [['first_name', 'last_name', 'phone_digital'], 'string'],
 		
-		    [['First_name', 'Last_name'], 'required'],
-            [['Age'], 'integer'],
-            [['First_name', 'Last_name'], 'string', 'max' => 50],
-			
-			/* [['client_id', 'phone_digital'], 'required'],
-            [['client_id'], 'integer'],
-            [['phone_digital'], 'string', 'max' => 10],
-            [['client_id'], 'exist', 'skipOnError' => true, 'targetClass' => ClientClient::className(), 'targetAttribute' => ['client_id' => 'id']], */
-			
+	    [['first_name','last_name'], 'trim'],
+		
+ 		[['first_name', 'last_name'], 'string', 'min'=> 4, 'max' => 50],
+		
+		[['first_name', 'last_name'], 'required'],
+		
+		[
+		[
+	    'first_name',
+		'last_name'],
+		'unique',
+		'targetClass' => Clients::className(),
+		'message' => \Yii::t('app', 'Fuck you'),
+		],
+		
+		
+		[['phone'], 'string'],
+		[['phone'], 'trim'],
+		
+        [['age'], 'integer'],
+ 		[['age'], 'number', 'max' => 100],
+		
 		];
     }
 	
-	public function registration(){
+	private function generate(){
 		
-	   $registration = new Clients();
-	   $generate = new SomeAccessories();
-	   $generate = $generate->generate();
-	   $registration->id = $generate;
-	   $registration->first_name = $this->First_name;
-	   $registration->last_name = $this->Last_name;
-       $registration->age = $this->Age;
+		$generate = \Yii::createObject(SomeAccessories::className());
+		
+		return $generate->generate();
+		
+	}
+	public function registration($id){
+		
+	   $registration = Yii::createObject(Clients::className());
+	   $registration->id = $id;
+	   $registration->first_name = $this->first_name;
+	   $registration->last_name = $this->last_name;
+       $registration->age = $this->age;
 	   
 	   return $registration->save();
 	}
-    public function addPhone(){
+	
+    public function addPhone($id, $phone_default){
 		
-		$this->Id_user = User::getId();
-		$addPhone = new ClinetPhone();
-		$addPhone->Client_id = $this->Id_user;
-		$addPhone->phone_digital = $this->Phone_digital;
+		$addPhone = Yii::createObject(ClinetPhone::className());
+		
+		$addPhone->id = $phone_default;
+		
+		$addPhone->client_id = $id;
+		
+		$addPhone->phone_digital = $this->phone_digital;
 		
 		return $addPhone->save();
+
 	}
 	
+    public function updatePhone($id){
+		
+		$addPhone = ClinetPhone::find()
+		->where(['client_id' => $id])
+		->all();
+		
+		foreach($addPhone as $phone){
+			
+			$phone->id = $this->phone;
+			$phone->phone_digital = $this->phone_digital;
+			$phone->update(false);
+			
+		}
 }
-
+}
 ?>

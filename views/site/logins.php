@@ -7,6 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Clients */
 /* @var $form ActiveForm */
 ?>
+<div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
 <div class="clients-index">
 
     <?php $form = ActiveForm::begin(); ?>
@@ -14,9 +15,10 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'first_name') ?>
         <?= $form->field($model, 'last_name') ?>
 		
-        <div class="form-group">
+        <div class="form-group" align = "right">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>
     <?php ActiveForm::end(); ?>
 
 </div><!-- clients-index -->
+</div>

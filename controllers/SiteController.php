@@ -8,10 +8,13 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use frontend\models\RegistrationForm;
+use frontend\models\RestForm;
 use frontend\models\Clients;
 use frontend\models\SomeAccessories;
 use frontend\models\LogintForm;
 use dektrium\user\traits\EventTrait;
+use frontend\models\ClinetPhone;
+
 /**
  * Site controller
  */
@@ -72,7 +75,7 @@ class SiteController extends Controller
 	/**
      * @inheritdoc
      */
-  /*   public function behaviors()
+/*     public function behaviors()
     {
         return [
             'access' => [
@@ -126,29 +129,49 @@ class SiteController extends Controller
 		$model = new Clients();
         return $this->render('index', ['model'=>$model]);
     }
+	
     public function actionRegist(){
 		
-	   $registration = new RegistrationForm();
-	   $some = new SomeAccessories();
+	   $registration = Yii::createObject(RegistrationForm::className());
+	   $some = Yii::createObject(SomeAccessories::className());
+	   $id = $some->render_id();
+	   $phone_default = $some->generate();
 	   
 	   if($some->postExist('RegistrationForm')){
 		   
 		   $registration->attributes = $some->postExist('RegistrationForm');
 		   
-		   if($registration->validate() && $registration->registration()){
+
+		   if($registration->validate() && $registration->registration($id) && $registration->addPhone($id, $phone_default)){
 			   
-			   return $this->goHome();
-			   
+			       $this->goHome();
+			 }
 		   }
-	   }
+		   
 		return $this->render('registration', ['registration' => $registration]);
 	}
 	
+	
 	public function actionAddPhone(){
 		
-		return $model->generate();
+		$rest = Yii::createObject(RestForm::className());
+	    $some = Yii::createObject(SomeAccessories::className());
 		
+		if($some->postExist('RestForm')){
+			
+			$rest->attributes = $some->postExist('RestForm');
+			
+			if($rest->validate() && $rest->updatePhone(\Yii::$app->user->getId())){
+				
+				$this->goHome();
+		   }
+
 	}
+	return $this->render('getid', ['rest' => $rest]);
+
+	}
+	
+	
 	public function actionLogin(){
 		
 	{
@@ -177,11 +200,14 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-    public function actionGetid(){
+
+	public function actionSuper(){
 		
-   		$id = \Yii::$app->user->getId();
-	   
-	    return $this->render('getid', ['id' => $id]);
+		$var = Yii::createObject(RegistrationForm::className());
+		$var_1 = $var->add_phone;
+		$var = $var->varAdd($var_1);
+		return $var;
+		
 		
 	}
-	}
+}

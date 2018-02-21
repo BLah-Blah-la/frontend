@@ -17,14 +17,12 @@ class Clients extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public static function tableName()
+
+	public static function tableName()
     {
         return 'client_client';
 	}
 
-    /**
-     * @inheritdoc
-     */
     public function attributeLabels()
     {
         return [
